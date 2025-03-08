@@ -13,3 +13,4 @@ mlflow.db
 # Entornos virtuales
 venv/
 .env/
+data/
