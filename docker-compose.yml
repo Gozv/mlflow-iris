@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  mlflow:
+    image: python:3.9
+    command: mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./artifacts --host 0.0.0.0
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./artifacts:/artifacts
+      - ./mlflow.db:/mlflow.db
+
+  api:
+    build: ./services/api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mlflow
+
+  streamlit:
+    image: python:3.9
+    command: streamlit run dashboards/monitor.py --server.port 8501
+    ports:
+      - "8501:8501"
+    depends_on:
+      - mlflow
