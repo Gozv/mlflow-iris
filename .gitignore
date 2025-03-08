@@ -1,0 +1,15 @@
+# Ignorar archivos generados y sensibles
+.env
+*.pyc
+__pycache__/
+*.ipynb_checkpoints/
+.DS_Store
+
+# Datos y modelos
+data/iris.csv  # Si contiene datos sensibles
+artifacts/
+mlflow.db
+
+# Entornos virtuales
+venv/
+.env/
